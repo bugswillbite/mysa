@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>≽ܫ≼mysa≽ܫ≼</title>
+    <title>Image Changer</title>
     <style>
+    
         body {
             background-color: black;
             color: white;
@@ -15,76 +16,151 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
             height: 100vh;
         }
-        button {
-            font-size: 1.5em;
+        #container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        #largeImage {
+            position:absolute;
+            margin-left: 25%;
+            flex: 1;
+            height: 700px;
+           width: 700px;
+        }
+
+        #smallIcons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .smallIcon1 {
+            position:absolute;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+            margin-left: 1530px;
+            margin-top: 275px;
             cursor: pointer;
-            background-color: #ff0000;
-            color: rgb(0, 0, 0);
-            font-family: "Courier New";
         }
-        #title {
-            margin-top: 10px;
-            font-size: 1.5em;
-            color: rgb(0, 0, 0);
-            font-family: "Courier New"; 
+        .smallIcon2 {
+            position:absolute;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+            margin-left: 1760px;
+            margin-top: 275px;
+            cursor: pointer;
         }
+        .smallIcon3 {
+            position:absolute;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+            margin-left: 1530px;
+            margin-top: 400px;
+            cursor: pointer;
+        }
+        .smallIcon4 {
+            position:absolute;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+            margin-left: 1760px;
+            margin-top: 400px;
+            cursor: pointer;
+        }
+        #back {
+            max-width: 99.7%;
+            height: auto;
+            margin-top: 40px;
+            opacity: 1; /* Initial opacity set to 100% */
+            transition: opacity 1s ease-in-out;
+        }
+
         #image {
             display: none;
-            max-width: 100%;
+            max-width: 600px;
             height: auto;
             opacity: 0;
             transition: opacity 1s ease-in-out;
+            margin-left: 10px;
         }
+
         #text {
             display: none;
-            margin-top: 20px;
+            margin-top: 30px;
             font-size: 1.5em;
             font-family: 'Courier New', Courier, monospace;
+            z-index: 1; /* Ensure the text is on top */
         }
-        #optionA {
-            font-size: 20px;
-            background-color: aliceblue;
-            font-family: 'Courier New', Courier, monospace;
+
+        #texty {
+            position: absolute;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            z-index: 1; /* Ensure the text is on top */
         }
-        #optionB {
-            font-size: 20px;
-            background-color: aliceblue;
-            font-family: 'Courier New', Courier, monospace;
+        #container{
+            position:relative;
         }
-        #name{
-            font-family: 'Courier New', Courier, monospace;
-        }
-    
     </style>
 </head>
 <body>
-    <p id="name"><b>////////////////////////////////m////////////////y////////////////s////////////////a////////////////</b></p>
-    <button id="myButton" onclick="showImage()"><b>start</b></button>
-    <img id="image" src="CW.png" alt="Displayed Image">
-    <div id="text"><b>>hello there...</b> <br><br>
-    <div id="opt">
-        <button id="optionA" onclick="chooseOption('A')"><b>hi...</b></button><br>
-        <button id="optionB" onclick="chooseOption('B')"><b>who tf r u???</b></button>
+    <img id="back" src="creep.png" alt="Background Image">
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <div id="container">
+        <img id="largeImage" src="DRESS1.png" alt="Large Image">
+        <div id="smallIcons">
+            <img class="smallIcon1" src="Ostrich copy.png" alt="Icon 1" onclick="changeImage('Dress3.png')">
+            <img class="smallIcon2" src="MonkeeT copy.png" alt="Icon 2" onclick="changeImage('dress5.png')">
+            <img class="smallIcon3" src="ChickenT copy.png" alt="Icon 3" onclick="changeImage('dress4.png')">
+            <img class="smallIcon4" src="tiger_t copy.png" alt="Icon 4" onclick="changeImage('dress2.png')">
+        </div>
     </div>
-    <script>
-        function showImage() {
-            
-            const button = document.getElementById('myButton');
-            const image = document.getElementById('image');
-            const text = document.getElementById('text');
-            
-            button.style.display = 'none';
 
-            fadeIn(image,100);
-            fadeIn(text, 300); 
-            fadeIn(optionA, 300); 
-            fadeIn(optionB, 300);
-           
+    <script>
+        function changeImage(imagePath) {
+            const largeImage = document.getElementById('largeImage');
+            largeImage.src = imagePath;
+        }
+     // Optional: You can set a timeout to delay the fade-out effect
+     setTimeout(() => {
+            fadeOut(document.getElementById('back'));
+        }, 1000); // Adjust the timing as needed (in milliseconds)
+
+        // Call showImage function when the page loads
+        window.onload = function () {
+            showImage();
+        };
+
+        function showImage() {
+            const image = document.getElementById('smallIcon');
+            const text = document.getElementById('text');
+          
+            
+
+            // Show and fade in the image
+            fadeIn(image);
+
+            // Show and fade in the text with a slower speed
+            fadeIn(text, 300); // Adjust the timing (in milliseconds)
+
+            // Show and fade in the buttons
+            fadeIn(optionA, 600);
+            fadeIn(optionB, 600);
+            fadeIn(optionC, 600);
+
         }
 
-        function fadeIn(element, intervalSpeed = 100) {
+        function fadeIn(element, intervalSpeed = 200) {
             element.style.display = 'block';
             element.style.opacity = 0;
 
@@ -95,22 +171,42 @@
                     clearInterval(fadeEffect);
                 }
             }, intervalSpeed);
-        
+
             setTimeout(function () {
                 optionA.style.display = 'block';
                 optionB.style.display = 'block';
-            }, 1000);
+                optionC.style.display = 'block';
+
+            }, 5000); // Adjust the timing as needed (in milliseconds)
+        }
+
+        function fadeOut(element, intervalSpeed = 200) {
+            const fadeEffect = setInterval(function () {
+                if (element.style.opacity > 0) {
+                    element.style.opacity = parseFloat(element.style.opacity) - 0.1;
+                } else {
+                    clearInterval(fadeEffect);
+                    element.style.display = 'none';
+
+                    // Fade in the next image
+                    const nextImage = document.getElementById('image');
+                    fadeIn(nextImage);
+                }
+            }, intervalSpeed);
         }
 
         function chooseOption(option) {
-           
+            // Handle the chosen option here
+
+            // Redirect to another page based on the chosen option
             if (option === 'A') {
-                window.location.href = 'pageA.html';
+                window.location.href = 'pageC.html';
             } else if (option === 'B') {
-                window.location.href = 'pageB.html';
+                window.location.href = 'pageE.html';
+            } else if (option === 'C') {
+                window.location.href = 'pageF.html';
             }
         }
-        
     </script>
 
 </body>
